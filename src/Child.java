@@ -19,7 +19,9 @@ public class Child extends User {
 		mode = Mode.POSITIVE;
 	}
 	public void addToken(int numTokens) {
-		for (int i = 0; i < numTokens; i++) {
+		int tokenAmount = numTokens;
+		
+		for (int i = 0; i < tokenAmount; i++) {
 			Token token = new Token(mode);
 			tokens.add(token);
 		}
@@ -27,14 +29,19 @@ public class Child extends User {
 	}
 
 	public void addToken(int numTokens, String note) {
-		for (int i = 0; i < numTokens; i++) {
+		int tokenAmount = numTokens;
+		
+		for (int i = 0; i < tokenAmount; i++) {
 			Token token = new Token(mode, note);
 			tokens.add(token);
 		}
 		System.out.println("Token(s) have been added successfully.");
 	}
 	
-	public void editToken(Token token, Mode newType, String newNote) {
+	public void editToken(Token token, Mode type, String note) {
+		Mode newType = type;
+		String newNote = note;
+		
 		token.setType(newType);
 		token.setNote(newNote);
 		System.out.println("Token has been edited successfully.");
@@ -54,20 +61,26 @@ public class Child extends User {
 	}
 	
 	public void addRewards(int cost, String reward) {
-		rewards.put(cost, reward);
+		int costInTokens = cost;
+		String rewardInfo = reward;
+		
+		rewards.put(costInTokens, rewardInfo);
 		System.out.println(reward.toUpperCase() + " has been added with a cost of " + cost + " tokens.");
 	}
 	
 	// Returns number of tokens that have been redeemed
 	public int redeemTokens(int numTokens, Mode mode) {
 		Iterator<Token> iter = tokens.iterator();
-		int tokenCount = 0; 
+		int tokenCount = 0;
+		
+		int tokenAmount = numTokens;
+		Mode currentMode = mode;
 		
 		// Removes the tokens redeemed from List<Token>
 		while(iter.hasNext()) {
-			if (iter.next().getType().equals(mode) && numTokens > 0) {
+			if (iter.next().getType().equals(currentMode) && tokenAmount > 0) {
 				iter.remove();
-				numTokens--;
+				tokenAmount--;
 				tokenCount++;
 			}
 		}
@@ -210,8 +223,11 @@ public class Child extends User {
 		}
 	}
 	
-	public void scheduleToken(int time, int tokenAmount) {
+	public void scheduleToken(int time, int numTokens) {
 		Timer t = new Timer( );
+		int timeInSeconds = time;
+		int tokenAmount = numTokens;
+		
 		t.scheduleAtFixedRate(new TimerTask() {
 
 		    @Override
@@ -227,7 +243,7 @@ public class Child extends User {
 		    	}
 		    }
 		}, 0, time * 1000);
-		System.out.println(tokenAmount + " tokens will be added every " + time + " seconds.");
+		System.out.println(tokenAmount + " tokens will be added every " + timeInSeconds + " seconds.");
 	}
 	
 	public Mode getMode() {
