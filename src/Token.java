@@ -45,4 +45,10 @@ public class Token {
 		return timestamp;
 	}
 	
+	public void printTokenInfo() {	
+		System.out.println("Token ID: " + Integer.toString(tokenId) +
+				"\tType: " + type + 
+				"\tTimestamp: " + timestamp +
+				"\tNote: " + note);
+	}
 }

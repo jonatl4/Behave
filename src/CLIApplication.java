@@ -74,10 +74,8 @@ public class CLIApplication implements IApplication {
 							System.out.println("Enter the USER ID of the child you wish to edit:\n");
 							
 							// Lists all children with ID, name, and mode
-							for (Child c: children) {
-								System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-										"\tChild's Name: " + c.getName() + 
-										"\tChild's Mode: " + c.getMode() + "\n");
+							for (Child c : children) {
+								c.printChildInfo();
 							}
 							
 							int childId = s.nextInt();
@@ -85,10 +83,10 @@ public class CLIApplication implements IApplication {
 							
 							for (Child c: children) {
 								if (childId == c.getUserId()) {
+									
+									// Lists selected child info with ID, name, and mode
 									System.out.println("You have selected:");
-									System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-											"\tChild's Name: " + c.getName() + 
-											"\tChild's Mode: " + c.getMode() + "\n");
+									c.printChildInfo();
 									
 									System.out.println("Set the child's new name: ");
 									String newName = s.nextLine();
@@ -105,11 +103,8 @@ public class CLIApplication implements IApplication {
 							}
 							
 							System.out.println("Enter the USER ID of the child you wish to delete:\n");
-							
-							for (Child c: children) {
-								System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-										"\tChild's Name: " + c.getName() + 
-										"\tChild's Mode: " + c.getMode() + "\n");
+							for (Child c : children) {
+								c.printChildInfo();
 							}
 							
 							int childId2 = s.nextInt();
@@ -130,10 +125,8 @@ public class CLIApplication implements IApplication {
 							}
 							
 							System.out.println("Enter the USER ID of the child you wish to add tokens to:\n");
-							for (Child c: children) {
-								System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-										"\tChild's Name: " + c.getName() + 
-										"\tChild's Mode: " + c.getMode() + "\n");
+							for (Child c : children) {
+								c.printChildInfo();
 							}
 							
 							int childId3 = s.nextInt();
@@ -142,20 +135,15 @@ public class CLIApplication implements IApplication {
 							for (Child c: children) {
 								if (childId3 == c.getUserId()) {
 									System.out.println("You have selected:");
-									System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-											"\tChild's Name: " + c.getName() + 
-											"\tChild's Mode: " + c.getMode() + "\n");
-								
-							
+									c.printChildInfo();
+									
 									System.out.println("How many tokens would you like to add?");
 									
 									int tokenAmount = s.nextInt();
 									s.nextLine();
 									
 									System.out.println("Add a note to the token(s) being added.");
-									
 									String note = s.nextLine();
-									
 									c.addToken(tokenAmount, note);
 								}
 							}
@@ -169,10 +157,8 @@ public class CLIApplication implements IApplication {
 							}
 							
 							System.out.println("Enter the USER ID of the child you wish to edit tokens for:\n");
-							for (Child c: children) {
-								System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-										"\tChild's Name: " + c.getName() + 
-										"\tChild's Mode: " + c.getMode() + "\n");
+							for (Child c : children) {
+								c.printChildInfo();
 							}
 							
 							int childId4 = s.nextInt();
@@ -181,18 +167,14 @@ public class CLIApplication implements IApplication {
 							for (Child c: children) {
 								if (childId4 == c.getUserId()) {
 									System.out.println("You have selected:");
-									System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-											"\tChild's Name: " + c.getName() + 
-											"\tChild's Mode: " + c.getMode() + "\n");
+									c.printChildInfo();
 							
 									System.out.println("ENTER the TOKEN ID of the token you wish to edit: \n");
 									List<Token> tokens = c.getTokens();
 									
-									for (Token t: tokens) {
-										System.out.println("Token ID: " + t.getTokenId() +
-												"\tType: " + t.getType() + 
-												"\tTimestamp: " + t.getTimestamp() +
-												"\tNote: " + t.getNote());
+									// Lists all tokens w/ type, timestamp, and note
+									for (Token t : tokens) {
+										t.printTokenInfo();
 									}
 									
 									int tokenId = s.nextInt();
@@ -201,10 +183,7 @@ public class CLIApplication implements IApplication {
 									for (Token t: tokens) {
 										if (tokenId == t.getTokenId()) {
 											System.out.println("You have selected:");
-											System.out.println("Token ID: " + t.getTokenId() +
-													"\tType: " + t.getType() + 
-													"\tTimestamp: " + t.getTimestamp() +
-													"\tNote: " + t.getNote());
+											t.printTokenInfo();
 											
 											Mode newType;
 											
@@ -243,10 +222,8 @@ public class CLIApplication implements IApplication {
 							}
 							
 							System.out.println("Enter the USER ID of the child you wish to edit tokens for:\n");
-							for (Child c: children) {
-								System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-										"\tChild's Name: " + c.getName() + 
-										"\tChild's Mode: " + c.getMode() + "\n");
+							for (Child c : children) {
+								c.printChildInfo();
 							}
 							
 							int childId5 = s.nextInt();
@@ -255,18 +232,12 @@ public class CLIApplication implements IApplication {
 							for (Child c: children) {
 								if (childId5 == c.getUserId()) {
 									System.out.println("You have selected:");
-									System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-											"\tChild's Name: " + c.getName() + 
-											"\tChild's Mode: " + c.getMode() + "\n");
+									c.printChildInfo();
 							
 									System.out.println("ENTER the TOKEN ID of the token you wish to delete: \n");
 									List<Token> tokens = c.getTokens();
-									
-									for (Token t: tokens) {
-										System.out.println("Token ID: " + t.getTokenId() +
-												"\tType: " + t.getType() + 
-												"\tTimestamp: " + t.getTimestamp() +
-												"\tNote: " + t.getNote());
+									for (Token t : tokens) {
+										t.printTokenInfo();
 									}
 									
 									int tokenId = s.nextInt();
@@ -288,16 +259,15 @@ public class CLIApplication implements IApplication {
 										"\tChild's Mode: " + c.getMode() + "\n");
 								List<Token> tokens = c.getTokens();
 								
-								System.out.println("List of Tokens: ");
-								for(Token t: tokens) {
-									System.out.println("Token ID: " + t.getTokenId() +
-											"\tType: " + t.getType() + 
-											"\tTimestamp: " + t.getTimestamp() +
-											"\tNote: " + t.getNote());
+								if(tokens.isEmpty()) {
+									System.out.println("No tokens available.");
+								} else {									
+									System.out.println("List of Tokens: ");
+									for(Token t: tokens) {
+										t.printTokenInfo();
+									}
 								}
-								
 							}
-							
 							break;
 							
 						
@@ -308,10 +278,8 @@ public class CLIApplication implements IApplication {
 							}
 							
 							System.out.println("Enter the USER ID of the child you wish to redeem tokens for:\n");
-							for (Child c: children) {
-								System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-										"\tChild's Name: " + c.getName() + 
-										"\tChild's Mode: " + c.getMode() + "\n");
+							for (Child c : children) {
+								c.printChildInfo();
 							}
 							
 							int childId6 = s.nextInt();
@@ -320,92 +288,13 @@ public class CLIApplication implements IApplication {
 							for (Child c: children) {
 								if (childId6 == c.getUserId()) {
 									System.out.println("You have selected:");
-									System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-											"\tChild's Name: " + c.getName() + 
-											"\tChild's Mode: " + c.getMode() + "\n");
+									c.printChildInfo();
 									
-									List<Token> tokens = c.getTokens();
+									c.redeemTokensByParent(c);
 									
-									if (c.getMode().equals(Mode.POSITIVE)) {
-										while (true) {
-											System.out.println("This child's mode is currently POSITIVE. Redeem a reward?");
-											System.out.println("1. Yes");
-											System.out.println("2. No");
-											String redeem = s.nextLine();
-											
-											if (redeem.equals("1")) {
-												int tokenAmount = 0;
-												while (tokenAmount <= 0) {
-													System.out.println("For how many tokens? (Must be greater than 0)");
-													tokenAmount = s.nextInt();
-													s.nextLine();
-												}
-												
-												System.out.println("For what reward?");
-												String reward = s.nextLine();
-												
-												int tokenCount = 0;
-												
-												Iterator<Token> iter = tokens.iterator();
-												while(iter.hasNext()) {
-													if (iter.next().getType().equals(Mode.POSITIVE) && tokenAmount > 0) {
-														iter.remove();
-														tokenAmount--;
-														tokenCount++;
-													}
-												}
-												
-												System.out.println(reward.toUpperCase() + " has been redeemed for " + tokenCount + " tokens.");
-												break;
-												
-											} else if (redeem.equals("2")) {
-												break;
-											} else {
-												System.out.println("Invalid command.");
-											}
-										}
-										
-									} else if (c.getMode().equals(Mode.NEGATIVE)) {
-										while (true) {
-											System.out.println("This child's mode is currently NEGATIVE. Redeem a reward?");
-											System.out.println("1. Yes");
-											System.out.println("2. No");
-											String redeem = s.nextLine();
-											
-											if (redeem.equals("1")) {
-												int tokenAmount = 0;
-												while (tokenAmount <= 0) {
-													System.out.println("For how many tokens? (Must be greater than 0)");
-													tokenAmount = s.nextInt();
-													s.nextLine();
-												}
-												
-												System.out.println("For what reward (any)?");
-												String reward = s.nextLine();
-												
-												int tokenCount = 0;
-												
-												Iterator<Token> iter = tokens.iterator();
-												while(iter.hasNext()) {
-													if (iter.next().getType().equals(Mode.NEGATIVE) && tokenAmount > 0) {
-														iter.remove();
-														tokenAmount--;
-														tokenCount++;
-													}
-												}
-												
-												System.out.println(reward.toUpperCase() + " has been redeemed for " + tokenCount + " tokens.");
-												break;
-												
-											} else if (redeem.equals("2")) {
-												break;
-											} else {
-												System.out.println("Invalid command.");
-											}
-										}
-									}
 								}
 							}
+							break;
 						
 						case "9":	// Token Redemption Settings							
 							if (children.isEmpty()) {
@@ -414,10 +303,8 @@ public class CLIApplication implements IApplication {
 							}
 							
 							System.out.println("Enter the USER ID of the child you wish to set redemption rewards for:\n");
-							for (Child c: children) {
-								System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-										"\tChild's Name: " + c.getName() + 
-										"\tChild's Mode: " + c.getMode() + "\n");
+							for (Child c : children) {
+								c.printChildInfo();
 							}
 							
 							int childId7 = s.nextInt();
@@ -426,9 +313,8 @@ public class CLIApplication implements IApplication {
 							for (Child c: children) {
 								if (childId7 == c.getUserId()) {
 									System.out.println("You have selected:");
-									System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-											"\tChild's Name: " + c.getName() + 
-											"\tChild's Mode: " + c.getMode() + "\n");
+									c.printChildInfo();
+									
 									System.out.println("What is the cost to redeem the reward? (Duplicate values will overwrite reward)");
 									int tokenAmount = s.nextInt();
 									s.nextLine();
@@ -448,11 +334,8 @@ public class CLIApplication implements IApplication {
 							}
 							
 							System.out.println("Enter the USER ID of the child you wish to set redemption rewards for:\n");
-							
-							for (Child c: children) {
-								System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-										"\tChild's Name: " + c.getName() + 
-										"\tChild's Mode: " + c.getMode() + "\n");
+							for (Child c : children) {
+								c.printChildInfo();
 							}
 							
 							int childId8 = s.nextInt();
@@ -461,9 +344,7 @@ public class CLIApplication implements IApplication {
 							for (Child c: children) {
 								if (childId8 == c.getUserId()) {
 									System.out.println("You have selected:");
-									System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-											"\tChild's Name: " + c.getName() + 
-											"\tChild's Mode: " + c.getMode() + "\n");
+									c.printChildInfo();
 									
 									Mode newMode;
 									
@@ -487,6 +368,7 @@ public class CLIApplication implements IApplication {
 									c.setMode(newMode);
 								}
 							}
+							break;
 						
 						case "11":	// Schedule Tokens	
 							if (children.isEmpty()) {
@@ -495,11 +377,8 @@ public class CLIApplication implements IApplication {
 							}
 							
 							System.out.println("Enter the USER ID of the child you wish to set redemption rewards for:\n");
-							
-							for (Child c: children) {
-								System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-										"\tChild's Name: " + c.getName() + 
-										"\tChild's Mode: " + c.getMode() + "\n");
+							for (Child c : children) {
+								c.printChildInfo();
 							}
 							
 							int childId9 = s.nextInt();
@@ -508,9 +387,7 @@ public class CLIApplication implements IApplication {
 							for (Child c: children) {
 								if (childId9 == c.getUserId()) {
 									System.out.println("You have selected:");
-									System.out.println("User ID: " + Integer.toString(c.getUserId()) + 
-											"\tChild's Name: " + c.getName() + 
-											"\tChild's Mode: " + c.getMode() + "\n");
+									c.printChildInfo();
 									System.out.println("");
 									
 									if (c.getReset()) {
@@ -572,91 +449,24 @@ public class CLIApplication implements IApplication {
 							switch (command) {
 								
 								case "1":	// List Tokens	
-									
-									System.out.println("List of your Tokens: ");
-									for(Token t: tokens) {
-										System.out.println("Token ID: " + t.getTokenId() +
-												"\tType: " + t.getType() + 
-												"\tTimestamp: " + t.getTimestamp() +
-												"\tNote: " + t.getNote());
+									if(tokens.isEmpty()) {
+										System.out.println("No tokens available.");
+									} else {									
+										System.out.println("List of your Tokens: ");
+										for(Token t: tokens) {
+											t.printTokenInfo();
+										}
 									}
 									break;
 								
 								case "2":	// Redeem Tokens for Reward
-									Map<Integer, String> rewards = c.getRewards();
-									
-									if(c.getMode().equals(Mode.NEGATIVE)) {
-										System.out.println("Uh oh, looks like you are in negative mode!");
-										break;
-									} else if (rewards.isEmpty()) {
-										System.out.println("Uh oh, looks like your parent set no rewards!");
-										break;
-									}
-									
-									System.out.println("Here are some rewards you can use your tokens to redeem!\n");
-
-									for(Map.Entry<Integer, String> entry : rewards.entrySet()) {
-										System.out.println("Tokens Needed: " + entry.getKey() + "\tReward: " + entry.getValue() + "\n");
-									}
-									
-									while (true) {
-										System.out.println("Want to redeem one of the rewards above?");
-										System.out.println("1. Yes");
-										System.out.println("2. No");
-										String redeem = s.nextLine();
-										
-										if (redeem.equals("1")) {
-											int tokenAmount = 0;
-											int tokensOwned = tokens.size();
-											
-											while (true) {
-												System.out.println("For how many tokens? (You currently have " + tokensOwned + " tokens.)");
-												tokenAmount = s.nextInt();
-												s.nextLine();
-												
-												if (tokenAmount > tokensOwned) {
-													System.out.println("You don't have enough tokens!");
-													tokenAmount = 0;
-												}
-											
-											
-												for (Map.Entry<Integer, String> entry : rewards.entrySet()) {
-													if(entry.getKey() == tokenAmount) {
-														while(true) {
-															System.out.println("Are you sure you want to redeem " + entry.getValue() + " for " +
-																	entry.getKey() + " tokens?");
-															System.out.println("1. Yes");
-															System.out.println("2. No");
-															
-															String confirm = s.nextLine();
-															
-															if (confirm.equals("1")) {
-	
-																c.redeemTokens(tokenAmount);
-																
-																System.out.println(entry.getValue().toUpperCase() + " has been redeemed for " + entry.getKey() + " tokens.");
-																break;
-															} else if (confirm.equals("2")) {
-																break;
-															} else {
-																System.out.println("Invalid command.");
-															}
-														}
-													}
-												}
-												break;
-											} 
-										} else if (redeem.equals("2")) {
-											break;
-										} else {
-											System.out.println("Invalid command.");
-										}
-										break;
-									}
+									c.redeemTokensByChild(c);
 									break;
 								case "0":
 									childMenu = false;
 									break;
+								default:
+									continue;
 							}
 						}
 					}
