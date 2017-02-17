@@ -1,4 +1,4 @@
 
-public enum Mode {
-	POSITIVE, NEGATIVE
+public interface Mode {
+	void print();
 }

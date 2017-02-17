@@ -10,13 +10,14 @@ public class Child extends User {
 	private boolean lock = false;
 	
 	Scanner s = new Scanner(System.in);
+	ModeFactory modeFactory = new ModeFactory();
 	
 	public Child(String name) {
 		super(name);
 		managerIds = new ArrayList<Integer>();
 		tokens = new ArrayList<Token>();
 		rewards = new HashMap<Integer, String>();
-		mode = Mode.POSITIVE;
+		mode = modeFactory.getMode("POSITIVE");
 	}
 	public void addToken(int numTokens) {
 		int tokenAmount = numTokens;
@@ -78,7 +79,7 @@ public class Child extends User {
 		
 		// Removes the tokens redeemed from List<Token>
 		while(iter.hasNext()) {
-			if (iter.next().getType().equals(currentMode) && tokenAmount > 0) {
+			if (iter.next().getType().getClass().equals(currentMode.getClass()) && tokenAmount > 0) {
 				iter.remove();
 				tokenAmount--;
 				tokenCount++;
@@ -90,7 +91,7 @@ public class Child extends User {
 	
 	public void redeemTokensByParent(Child child) {
 		
-		if (child.getMode().equals(Mode.POSITIVE)) {
+		if (mode instanceof Positive) {
 			while (true) {
 				System.out.println("This child's mode is currently POSITIVE. Redeem a reward?");
 				System.out.println("1. Yes");
@@ -108,7 +109,7 @@ public class Child extends User {
 					System.out.println("For what reward?");
 					String reward = s.nextLine();
 					
-					int tokenCount = redeemTokens(tokenAmount, Mode.POSITIVE);
+					int tokenCount = redeemTokens(tokenAmount, modeFactory.getMode("POSITIVE"));
 					
 					System.out.println(reward.toUpperCase() + " has been redeemed for " + tokenCount + " tokens.");
 					break;
@@ -120,7 +121,7 @@ public class Child extends User {
 				}
 			}
 			
-		} else if (child.getMode().equals(Mode.NEGATIVE)) {
+		} else if (mode instanceof Negative) {
 			while (true) {
 				System.out.println("This child's mode is currently NEGATIVE. Redeem a reward?");
 				System.out.println("1. Yes");
@@ -138,7 +139,7 @@ public class Child extends User {
 					System.out.println("For what reward (any)?");
 					String reward = s.nextLine();
 					
-					int tokenCount = redeemTokens(tokenAmount, Mode.NEGATIVE);
+					int tokenCount = redeemTokens(tokenAmount, modeFactory.getMode("NEGATIVE"));
 
 					System.out.println(reward.toUpperCase() + " has been redeemed for " + tokenCount + " tokens.");
 					break;
@@ -154,7 +155,7 @@ public class Child extends User {
 	
 	public void redeemTokensByChild(Child child) {
 		
-		if(child.getMode().equals(Mode.NEGATIVE)) {
+		if(mode instanceof Negative) {
 			System.out.println("Uh oh, looks like you are in negative mode!");
 			return;
 		} else if (rewards.isEmpty()) {
@@ -201,7 +202,7 @@ public class Child extends User {
 								String confirm = s.nextLine();
 								
 								if (confirm.equals("1")) {
-									int tokenCount = child.redeemTokens(tokenAmount, Mode.POSITIVE);
+									int tokenCount = child.redeemTokens(tokenAmount, modeFactory.getMode("POSITIVE"));
 									System.out.println(entry.getValue().toUpperCase() + " has been redeemed for " + tokenCount + " tokens.");
 									confirmRedeem = false;
 								} else if (confirm.equals("2")) {
@@ -273,6 +274,6 @@ public class Child extends User {
 	public void printChildInfo() {
 		System.out.println("User ID: " + Integer.toString(id) + 
 				"\tChild's Name: " + name + 
-				"\tChild's Mode: " + mode + "\n");
+				"\tChild's Mode: " + mode.toString() + "\n");
 	}
 }

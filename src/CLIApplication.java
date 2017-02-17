@@ -180,6 +180,8 @@ public class CLIApplication implements IApplication {
 									int tokenId = s.nextInt();
 									s.nextLine();
 									
+									ModeFactory modeFactory = new ModeFactory();
+									
 									for (Token t: tokens) {
 										if (tokenId == t.getTokenId()) {
 											System.out.println("You have selected:");
@@ -194,10 +196,10 @@ public class CLIApplication implements IApplication {
 												String type = s.nextLine();
 												
 												if (type.equals("1")) {
-													newType = Mode.POSITIVE;
+													newType = modeFactory.getMode("POSITIVE");
 													break;
 												} else if (type.equals("2")) {
-													newType = Mode.NEGATIVE;
+													newType = modeFactory.getMode("NEGATIVE");
 													break;
 												} else {
 													System.out.println("Invalid command.");
@@ -341,6 +343,8 @@ public class CLIApplication implements IApplication {
 							int childId8 = s.nextInt();
 							s.nextLine();		
 							
+							ModeFactory modeFactory = new ModeFactory();
+							
 							for (Child c: children) {
 								if (childId8 == c.getUserId()) {
 									System.out.println("You have selected:");
@@ -355,10 +359,10 @@ public class CLIApplication implements IApplication {
 										String type = s.nextLine();
 										
 										if (type.equals("1")) {
-											newMode = Mode.POSITIVE;
+											newMode = modeFactory.getMode("POSITIVE");
 											break;
 										} else if (type.equals("2")) {
-											newMode = Mode.NEGATIVE;
+											newMode = modeFactory.getMode("NEGATIVE");
 											break;
 										} else {
 											System.out.println("Invalid command.");
