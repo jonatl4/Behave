@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class CLIApplication implements IApplication {
+public class CLIApplication extends IApplication {
 	
 	private List<Parent> parentUsers;
 	private List<Child> childUsers;	
@@ -11,13 +11,26 @@ public class CLIApplication implements IApplication {
 		childUsers = new ArrayList<Child>();
 	}
 	
+	public void init() {
+		System.out.println(",-----.         ,--.                            ");  
+		System.out.println("|  |) /_  ,---. |  ,---.  ,--,--.,--.  ,--.,---.");  
+		System.out.println("|  .-.  \\| .-. :|  .-.  |' ,-.  | \\  `'  /| .-. :"); 
+		System.out.println("|  '--' /\\   --.|  | |  |\\ '-'  |  \\    / \\   --."); 
+		System.out.println("`------'  `----'`--' `--' `--`--'   `--'   `----'"); 
+		
+		System.out.println("				Welcome to Behave!					\n\n");
+	}
+	
 	public void start() {
-		System.out.println("Welcome to Behave!");
+		
 		Scanner s = new Scanner(System.in);
 		
-		while(true) {
+		boolean mainMenu = true;
+		
+		while(mainMenu) {
 
-			System.out.println("Are you a (P)arent or a (C)hild?");
+			System.out.println("Are you a (P)arent or a (C)hild?\n");
+			System.out.println("...or would you like to (E)xit");
 			
 			String selection = s.nextLine();
 			
@@ -26,7 +39,7 @@ public class CLIApplication implements IApplication {
 			Parent parent;
 			
 			// Selection menu for Parent or Child
-			if (selection.equals("P")) {
+			if (selection.toUpperCase().equals("P")) {
 				
 				// Check if new parent
 				if (parentUsers.isEmpty()) {
@@ -422,7 +435,7 @@ public class CLIApplication implements IApplication {
 							
 					}
 				}
-			} else if (selection.equals("C")) {
+			} else if (selection.toUpperCase().equals("C")) {
 				if (childUsers.isEmpty()) {
 					System.out.println("Parents haven't added any kids yet!");
 					break;
@@ -475,9 +488,16 @@ public class CLIApplication implements IApplication {
 						}
 					}
 				}
+			} else if (selection.toUpperCase().equals("E")) {
+				mainMenu = false;
 			}
 		}
 		s.close();
+	}
+	
+	public void stop() {
+		System.out.println("			Thank you for using Behave!				");
+		System.out.println("			Hope to see you again soon!				");
 	}
 	
 	public void displayParentMenu() {
