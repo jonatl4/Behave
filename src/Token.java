@@ -1,8 +1,11 @@
+import java.io.Serializable;
 import java.util.Date;
 
-public class Token {
+import org.joda.time.DateTime;
+
+public class Token implements Serializable{
 	private int tokenId;
-	private Date timestamp;
+	private DateTime timestamp;
 	private Mode type;
 	private String note;
 	
@@ -11,14 +14,14 @@ public class Token {
 	public Token(Mode type) {
 		tokenId = ++counter;
 		this.type = type;
-		timestamp = new Date();
+		timestamp = new DateTime();
 	}
 	
 	public Token(Mode type, String note) {
 		tokenId = ++counter;
 		this.type = type;
 		this.note = note;
-		timestamp = new Date();
+		timestamp = new DateTime();
 	}
 	
 	public int getTokenId() {
@@ -41,7 +44,7 @@ public class Token {
 		this.note = note;
 	}
 	
-	public Date getTimestamp() {
+	public DateTime getTimestamp() {
 		return timestamp;
 	}
 	

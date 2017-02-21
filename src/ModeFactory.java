@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class ModeFactory {
+public class ModeFactory implements Serializable {
 	
 	public Mode getMode(String modeType) {
 		if (modeType == null) {

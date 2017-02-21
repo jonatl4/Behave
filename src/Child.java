@@ -1,7 +1,6 @@
 import java.util.*;
 
 public class Child extends User {
-	private List<Integer> managerIds;
 	private Mode mode;
 	private List<Token> tokens;
 	
@@ -9,12 +8,10 @@ public class Child extends User {
 	private boolean reset = false;
 	private boolean lock = false;
 	
-	Scanner s = new Scanner(System.in);
 	ModeFactory modeFactory = new ModeFactory();
 	
 	public Child(String name) {
 		super(name);
-		managerIds = new ArrayList<Integer>();
 		tokens = new ArrayList<Token>();
 		rewards = new HashMap<Integer, String>();
 		mode = modeFactory.getMode("POSITIVE");
@@ -49,7 +46,14 @@ public class Child extends User {
 	}
 	
 	public void removeToken(Token token) {
-		tokens.remove(token);
+		Iterator<Token> iter = tokens.iterator();
+		
+		while(iter.hasNext()) {
+			Token t = iter.next();
+			if (t.getTokenId() == (token.getTokenId())) {
+				iter.remove();
+			}
+		}
 		System.out.println("Token has been deleted successfully.");
 	}
 	
@@ -87,141 +91,6 @@ public class Child extends User {
 		}
 		
 		return tokenCount;
-	}
-	
-	public void redeemTokensByParent(Child child) {
-		
-		if (mode instanceof Positive) {
-			while (true) {
-				System.out.println("This child's mode is currently POSITIVE. Redeem a reward?");
-				System.out.println("1. Yes");
-				System.out.println("2. No");
-				String redeem = s.nextLine();
-				
-				if (redeem.equals("1")) {
-					int tokenAmount = 0;
-					while (tokenAmount <= 0) {
-						System.out.println("For how many tokens? (Must be greater than 0)");
-						tokenAmount = s.nextInt();
-						s.nextLine();
-					}
-					
-					System.out.println("For what reward?");
-					String reward = s.nextLine();
-					
-					int tokenCount = redeemTokens(tokenAmount, modeFactory.getMode("POSITIVE"));
-					
-					System.out.println(reward.toUpperCase() + " has been redeemed for " + tokenCount + " tokens.");
-					break;
-					
-				} else if (redeem.equals("2")) {
-					break;
-				} else {
-					System.out.println("Invalid command.");
-				}
-			}
-			
-		} else if (mode instanceof Negative) {
-			while (true) {
-				System.out.println("This child's mode is currently NEGATIVE. Redeem a reward?");
-				System.out.println("1. Yes");
-				System.out.println("2. No");
-				String redeem = s.nextLine();
-				
-				if (redeem.equals("1")) {
-					int tokenAmount = 0;
-					while (tokenAmount <= 0) {
-						System.out.println("For how many tokens? (Must be greater than 0)");
-						tokenAmount = s.nextInt();
-						s.nextLine();
-					}
-					
-					System.out.println("For what reward (any)?");
-					String reward = s.nextLine();
-					
-					int tokenCount = redeemTokens(tokenAmount, modeFactory.getMode("NEGATIVE"));
-
-					System.out.println(reward.toUpperCase() + " has been redeemed for " + tokenCount + " tokens.");
-					break;
-					
-				} else if (redeem.equals("2")) {
-					break;
-				} else {
-					System.out.println("Invalid command.");
-				}
-			}
-		}
-	}
-	
-	public void redeemTokensByChild(Child child) {
-		
-		if(mode instanceof Negative) {
-			System.out.println("Uh oh, looks like you are in negative mode!");
-			return;
-		} else if (rewards.isEmpty()) {
-			System.out.println("Uh oh, looks like your parent set no rewards!");
-			return;
-		}
-		
-		System.out.println("Here are some rewards you can use your tokens to redeem!\n");
-
-		for(Map.Entry<Integer, String> entry : rewards.entrySet()) {
-			System.out.println("Tokens Needed: " + entry.getKey() + "\tReward: " + entry.getValue() + "\n");
-		}
-		
-		while (true) {
-			System.out.println("Want to redeem one of the rewards above?");
-			System.out.println("1. Yes");
-			System.out.println("2. No");
-			String redeem = s.nextLine();
-			
-			if (redeem.equals("1")) {
-				int tokenAmount = 0;
-				int tokensOwned = tokens.size();
-				
-				boolean howManyTokens = true;
-				while (howManyTokens) {
-					System.out.println("For how many tokens? (You currently have " + tokensOwned + " tokens.)");
-					tokenAmount = s.nextInt();
-					s.nextLine();
-					
-					if (tokenAmount > tokensOwned) {
-						System.out.println("You don't have enough tokens!");
-						tokenAmount = 0;
-					}
-				
-					for (Map.Entry<Integer, String> entry : rewards.entrySet()) {
-						if(entry.getKey() == tokenAmount) {
-							boolean confirmRedeem = true;
-							while(confirmRedeem) {
-								System.out.println("Are you sure you want to redeem " + entry.getValue() + " for " +
-										entry.getKey() + " tokens?");
-								System.out.println("1. Yes");
-								System.out.println("2. No");
-								
-								String confirm = s.nextLine();
-								
-								if (confirm.equals("1")) {
-									int tokenCount = child.redeemTokens(tokenAmount, modeFactory.getMode("POSITIVE"));
-									System.out.println(entry.getValue().toUpperCase() + " has been redeemed for " + tokenCount + " tokens.");
-									confirmRedeem = false;
-								} else if (confirm.equals("2")) {
-									confirmRedeem = false;
-								} else {
-									System.out.println("Invalid command.");
-								}
-							}
-						}
-					}
-					howManyTokens = false;
-				} 
-			} else if (redeem.equals("2")) {
-				return;
-			} else {
-				System.out.println("Invalid command.");
-			}
-			break;
-		}
 	}
 	
 	public void scheduleToken(int time, int numTokens) {

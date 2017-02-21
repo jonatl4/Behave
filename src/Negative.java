@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Negative implements Mode {
+public class Negative implements Mode, Serializable {
 	
 	@Override
 	public void print() {
